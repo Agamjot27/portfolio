@@ -184,18 +184,70 @@ export const projects: Project[] = [
     }
   },
   {
-    id: "call-intelligence-nlp",
-    title: "Unified AI Customer Care System",
-    screenshots: [
-      "/screenshots/nlp-call-dash.png",
-      "/screenshots/nlp-call-text.png",
-      "/screenshots/nlp-call-smart.png",
-      "/screenshots/nlp-call-summ.png",
-      "/screenshots/nlp-call-nlp.png",
-    ],
-    thumbnail: "/screenshots/nlp-call-dash.png",
+    id: "darziatdoor",
+    title: "DarziAtDoor — Bespoke Doorstep Tailoring Platform",
+    screenshots: [],
+    thumbnail: "",
     description:
-      "FastAPI + Streamlit customer support automation platform for L1 chat, grievance routing, and call transcript intelligence.",
+      "React + Node.js + MongoDB platform connecting customers with local master tailors for custom-fit clothing, alterations, and doorstep measurements.",
+    longDescription:
+      "DarziAtDoor is an end-to-end digital marketplace bridging local master tailors (Darzis) with modern customers seeking custom-fit clothing and doorstep tailoring services. The platform features a customer-facing booking flow, a tailor portal for order and storefront management, and an admin dashboard for platform analytics and catalog control. Built with React 18 + Vite frontend, Express.js v5 backend, MongoDB with Mongoose ODM, JWT authentication, and bcrypt password hashing.",
+    tech: ["React 18", "Vite", "Node.js", "Express.js", "MongoDB", "Mongoose", "JWT", "Bcrypt", "React Router DOM"],
+    github: "https://github.com/Agamjot27/darziatdoor",
+    live: "",
+    role: "Full-Stack Developer",
+    duration: "2025",
+    category: "Full-Stack",
+    metrics: [
+      { label: "User roles", value: "3" },
+      { label: "Auth", value: "JWT + Bcrypt" },
+      { label: "DB", value: "MongoDB" }
+    ],
+    keyFeatures: [
+      "Doorstep measurement booking flow with express booking for urgent requirements.",
+      "Fabric and style library for curated customization options.",
+      "Real-time order tracking from placement to doorstep delivery.",
+      "Tailor portal (Master Darzi) for order management, storefront customization, and client communications.",
+      "Admin dashboard with platform analytics, user and role management, and catalog control.",
+      "JWT authentication with bcrypt password hashing and role-based access for customers, tailors, and admins.",
+      "Concurrent frontend and backend startup with npm run dev from root."
+    ],
+    caseStudy: {
+      problem:
+        "Local tailors lack a digital presence and booking system, while customers seeking custom-fit clothing have no reliable way to discover, book, and track doorstep tailoring services.",
+      whyBuilt:
+        "DarziAtDoor was built to digitize the traditional tailoring workflow — giving tailors a storefront and order pipeline while giving customers a seamless booking and tracking experience.",
+      users:
+        "Customers book doorstep measurements and track garment orders; tailors manage order queues, showcase craftsmanship, and communicate with clients; admins oversee platform health and catalog.",
+      impact:
+        "The platform delivers three distinct role-based experiences under one system, with real-time order tracking and a verifiable tailor marketplace replacing word-of-mouth discovery.",
+      architecture: {
+        interface: "React 18 + Vite SPA with React Router DOM v6, Lucide icons, and responsive CSS3 — covering customer booking, tailor portal, and admin dashboard views.",
+        orchestration: "Express.js v5 REST API with modular routes, controllers, and middleware for auth, error handling, and CORS. Concurrent root npm script starts both services together.",
+        auth: "JWT tokens issued on login, verified via middleware on protected routes. Bcrypt handles password hashing. Role-based guards separate customer, tailor, and admin access.",
+        data: "MongoDB with Mongoose ODM stores users, orders, tailor profiles, fabrics, and catalog entries. Environment isolation via .env for both frontend and backend.",
+        intelligence: "Business logic lives in Express controllers handling booking state transitions, order status updates, tailor verification, and admin catalog operations."
+      },
+      journey: [
+        { phase: "Problem", title: "Tailors are invisible online", copy: "The project started from observing that skilled local tailors had no digital presence and customers had no reliable way to find or book custom tailoring services." },
+        { phase: "Research", title: "Mapped three distinct user workflows", copy: "The system was designed around three roles — customer booking flow, tailor order management, and admin oversight — each with its own data model and UI surface." },
+        { phase: "Architecture Decisions", title: "Monorepo with concurrent startup", copy: "Frontend and backend are kept in a single repository with a root package.json script that starts both concurrently, simplifying development and deployment." },
+        { phase: "Optimization", title: "Role-based access throughout", copy: "JWT middleware and role checks are applied at the route level, ensuring customers cannot access tailor or admin endpoints and vice versa." },
+        { phase: "Final Outcome", title: "A three-sided tailoring marketplace", copy: "DarziAtDoor delivers a complete booking-to-delivery workflow with separate portals for customers, tailors, and admins backed by a secure MERN stack." }
+      ],
+      lessons: [
+        { title: "Technical lesson", copy: "Designing for multiple user roles from the start forces cleaner data models and route organization than retrofitting roles onto a single-user system." },
+        { title: "Scaling insight", copy: "Production deployment would add real-time notifications via Socket.io, payment gateway integration, and CDN-backed image storage for tailor portfolios." },
+        { title: "Design tradeoff", copy: "Using Vite over Next.js kept the frontend lightweight for the demo, but production would benefit from SSR for SEO on tailor profile and fabric listing pages." }
+      ],
+      code: {
+        frontend: "// Customer booking flow\n<Route path='/book' element={<ExpressBooking />} />\n<Route path='/track/:orderId' element={<OrderTracking />} />\n<Route path='/tailor/:id' element={<TailorProfile />} />",
+        backend: "app.use('/api/auth', authRoutes);\napp.use('/api/orders', protect, orderRoutes);\napp.use('/api/tailors', tailorRoutes);\napp.use('/api/admin', protect, adminOnly, adminRoutes);",
+        data: "// Order schema\norderId, customer, tailor, garmentType,\nmeasurements, fabric, status, timeline,\nestimatedDelivery, trackingUpdates[]",
+        intelligence: "// Order state machine\nPENDING → MEASUREMENT_BOOKED → IN_STITCHING\n  → QUALITY_CHECK → OUT_FOR_DELIVERY → DELIVERED"
+      }
+    }
+  },
     longDescription:
       "Built a modular AI customer care system that automates Level 1 support queries, classifies and routes grievances, and extracts actionable insights from unstructured call transcripts. The system uses a Streamlit frontend, FastAPI REST backend, Pydantic request and response models, and a Groq-powered Llama3-8b NLP service for sentiment analysis, intent detection, response generation, transcript summarization, tag extraction, and context-aware Q&A.",
     tech: ["Python", "FastAPI", "Streamlit", "Pydantic", "Groq API", "Llama3-8b", "NLP"],
@@ -256,36 +308,63 @@ export const projects: Project[] = [
     }
   },
   {
-    id: "clubops",
-    title: "ClubOps — Event & Member App",
-    screenshots: [
-      "/screenshots/clubops-memdash.png",
-      "/screenshots/clubops-profile.png",
-      "/screenshots/clubops-event.png",
-      "/screenshots/clubops-comm.png",
-      "/screenshots/clubops-direc.png",
-    ],
-    thumbnail: "/screenshots/clubops-memdash.png",
+    id: "researchmind",
+    title: "ResearchMind — AI Research Intelligence Platform",
+    screenshots: [],
+    thumbnail: "",
     description:
-      "Cross-platform club app for events and member communication, serving 100+ users.",
+      "AI-powered research assistant that analyzes academic papers, generates structured summaries, and enables RAG-based research Q&A.",
     longDescription:
-      "Led development of a cross-platform application to streamline club events and member communication. Used Firebase Authentication for secure login, Cloud Firestore for real-time data, and Cloud Messaging for push notifications—supporting 100+ active users.",
-    tech: ["Flutter", "Firebase Auth", "Cloud Firestore", "FCM", "Dart"],
-    github: "https://github.com/Agamjot27",
+      "ResearchMind is an AI research intelligence platform designed to accelerate academic discovery. It enables researchers to upload papers, extract and analyze content, generate structured summaries and critiques, build semantic knowledge graphs, and perform RAG-based Q&A on research documents using advanced NLP pipelines.",
+    tech: ["Python", "RAG", "LangChain", "FAISS", "Groq LLM", "NLP", "PDF Processing"],
+    github: "https://github.com/Agamjot27/ResearchMind",
     live: "",
-    role: "Lead Developer",
-    duration: "June 2025 – August 2025",
-    category: "Full-Stack",
+    role: "AI Engineer",
+    duration: "2025",
+    category: "ML/AI",
     metrics: [
-      { label: "Active users", value: "100+" },
-      { label: "Platform", value: "Cross-platform" }
+      { label: "Pipeline", value: "RAG" },
+      { label: "LLM", value: "Groq" },
+      { label: "Storage", value: "FAISS" }
     ],
     keyFeatures: [
-      "Firebase Authentication and secure session handling.",
-      "Real-time event and member data with Firestore.",
-      "Push notifications via Firebase Cloud Messaging.",
-      "Event scheduling and member communication workflows."
-    ]
+      "PDF ingestion with text extraction, chunking, and semantic embedding via FAISS index.",
+      "RAG-based Q&A — ask questions grounded in uploaded research documents.",
+      "Structured summaries and research quality critiques generated by Groq LLM.",
+      "Semantic knowledge graph construction from paper content.",
+      "Literature review and future research direction recommendations.",
+      "Source-grounded retrieval ensuring answers trace back to document evidence."
+    ],
+    caseStudy: {
+      problem:
+        "Researchers spend hours manually reading and cross-referencing papers. ResearchMind automates extraction, summarization, and Q&A to surface insights faster.",
+      whyBuilt:
+        "Built to replace manual literature review with an AI pipeline that ingests PDFs, indexes semantics, and answers questions with citations.",
+      users:
+        "Researchers, academics, and students who need to rapidly understand, compare, and extract insights from scientific papers.",
+      impact:
+        "Reduces literature review time significantly by providing instant structured summaries, critiques, and grounded Q&A over uploaded documents.",
+      architecture: {
+        interface: "Gradio UI for PDF upload, question input, and structured output display with source attribution.",
+        orchestration: "LangChain orchestrates the RAG pipeline — document loading, chunking, embedding, retrieval, and LLM generation.",
+        auth: "Stateless demo; production would add user sessions and document storage with access controls.",
+        data: "PyMuPDF extracts text from PDFs; LangChain chunks and embeds content into a FAISS vector index for semantic retrieval.",
+        intelligence: "Groq LLM generates answers, summaries, critiques, and research directions grounded in retrieved document chunks."
+      },
+      journey: [
+        { phase: "Problem", title: "Manual literature review is slow", copy: "The project started from the observation that reading and synthesizing multiple research papers manually is the biggest time sink for researchers." },
+        { phase: "Architecture Decisions", title: "RAG over fine-tuning", copy: "RAG was chosen over fine-tuning so the system stays grounded in the actual uploaded documents rather than hallucinating from parametric memory." },
+        { phase: "Final Outcome", title: "An end-to-end research assistant", copy: "ResearchMind delivers structured summaries, critiques, knowledge graphs, and grounded Q&A from any uploaded research PDF." }
+      ],
+      lessons: [
+        { title: "Technical lesson", copy: "FAISS semantic indexing with well-tuned chunk sizes dramatically improves retrieval quality and reduces hallucination in LLM answers." },
+        { title: "Scaling insight", copy: "Production would replace FAISS with a managed vector DB like Pinecone or Weaviate and add multi-document cross-reference capabilities." }
+      ],
+      code: {
+        backend: "loader = PyMuPDFLoader(pdf_path)\ndocs = loader.load()\nchunks = text_splitter.split_documents(docs)\ndb = FAISS.from_documents(chunks, embeddings)",
+        intelligence: "retriever = db.as_retriever(search_kwargs={'k': 4})\nqa_chain = RetrievalQA.from_chain_type(\n  llm=groq_llm, retriever=retriever\n)\nanswer = qa_chain.run(question)"
+      }
+    }
   }
 ];
 

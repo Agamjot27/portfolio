@@ -248,65 +248,6 @@ export const projects: Project[] = [
       }
     }
   },
-    longDescription:
-      "Built a modular AI customer care system that automates Level 1 support queries, classifies and routes grievances, and extracts actionable insights from unstructured call transcripts. The system uses a Streamlit frontend, FastAPI REST backend, Pydantic request and response models, and a Groq-powered Llama3-8b NLP service for sentiment analysis, intent detection, response generation, transcript summarization, tag extraction, and context-aware Q&A.",
-    tech: ["Python", "FastAPI", "Streamlit", "Pydantic", "Groq API", "Llama3-8b", "NLP"],
-    github: "https://github.com/Agamjot27",
-    live: "",
-    role: "Full-Stack AI Engineer",
-    duration: "May 2025 – June 2025",
-    category: "ML/AI",
-    metrics: [
-      { label: "Manual review effort reduced", value: "~40%" },
-      { label: "Grievance resolution time reduced", value: "~30%" },
-      { label: "Core AI modules", value: "3" }
-    ],
-    keyFeatures: [
-      "L1 automation chatbot with sentiment analysis, intent detection, technical specialization, and escalation prediction.",
-      "Smart grievance management that classifies complaints, assigns priority, and suggests relevant departments.",
-      "Call intelligence pipeline for transcript summaries, tag/entity extraction, sentiment analysis, and transcript Q&A.",
-      "FastAPI service-layer architecture with route handlers for chat, grievance management, and call analysis.",
-      "Groq Llama3-8b integration through an OpenAI-compatible client with structured JSON parsing and fallbacks.",
-      "Streamlit frontend with three operational tabs and session-state based conversation continuity."
-    ],
-    caseStudy: {
-      problem:
-        "Customer support teams deal with long hold times, delayed grievance routing, and large volumes of unstructured call transcripts that are slow to review manually.",
-      whyBuilt:
-        "The system was built to turn repetitive L1 support and transcript review into an AI-assisted workflow that can answer common issues, route serious complaints, and surface training insights quickly.",
-      users:
-        "Support managers monitor escalations and quality insights, agents handle routed cases with better context, and customers get faster first responses through text or simulated voice flows.",
-      impact:
-        "The platform targets roughly 40% less manual transcript review effort and roughly 30% faster grievance resolution through automated classification and routing.",
-      architecture: {
-        interface: "Streamlit provides a three-tab command surface for L1 automation, grievance management, and call intelligence, while preserving conversation state in st.session_state.",
-        orchestration: "FastAPI route handlers validate requests with Pydantic and coordinate service calls for chat, grievance classification, call analysis, and transcript Q&A.",
-        auth: "The demo is stateless and unauthenticated; production notes call for JWT/OAuth, rate limiting, CORS hardening, and persistent user/session storage.",
-        data: "The current design avoids a database for demo speed, using in-memory frontend session state; production scaling would add PostgreSQL or MongoDB plus Redis caching.",
-        intelligence: "A centralized NLP service calls Groq's Llama3-8b model for sentiment, intent, generation, summarization, entity extraction, escalation signals, and context-aware Q&A."
-      },
-      journey: [
-        { phase: "Problem", title: "Support work was slow at the exact points users notice", copy: "The project began with three support bottlenecks: customers waiting on simple issues, grievances being misrouted, and managers manually reading transcripts for quality signals." },
-        { phase: "Research", title: "Mapped customer-care work into three AI surfaces", copy: "The system was split into L1 chat automation, grievance routing, and call intelligence so each NLP capability had a clear operational job." },
-        { phase: "Failed attempts", title: "Avoided a single generic chatbot", copy: "A plain chatbot would hide the strongest engineering work, so the final design exposes sentiment, intent, specialization, escalation, summaries, and Q&A as separate inspectable outputs." },
-        { phase: "Architecture Decisions", title: "Separated HTTP handling from NLP behavior", copy: "FastAPI routers handle validation and orchestration, while the NLP service owns prompts, Groq calls, structured JSON parsing, fallbacks, and business rules." },
-        { phase: "Optimization", title: "Designed for scaling beyond the demo", copy: "The stateless backend can be horizontally scaled; the documented next steps include Redis caching, PostgreSQL persistence, queues for LLM calls, and parallel NLP tasks." },
-        { phase: "Final Outcome", title: "A modular AI support platform", copy: "The final product demonstrates enterprise support automation with live chat intelligence, grievance triage, transcript summarization, and context-aware transcript questioning." }
-      ],
-      lessons: [
-        { title: "Technical lesson", copy: "LLM products become more reliable when model calls are isolated behind a service layer with schema validation, whitelist checks, and fallback behavior." },
-        { title: "Mistake corrected", copy: "The strongest version was not one all-purpose chat box; it was a system that made each NLP decision visible and reviewable." },
-        { title: "Scaling insight", copy: "A stateless FastAPI backend is easy to demo and horizontally scale, but production needs persistence, caching, queues, and request prioritization." },
-        { title: "Design tradeoff", copy: "Streamlit accelerated delivery and demos, while a production customer-facing version would move the frontend to React or Vue with WebSockets." }
-      ],
-      code: {
-        frontend: "tab_chat, tab_grievance, tab_call = st.tabs([\n  'L1 Automation',\n  'Grievance Management',\n  'Call Intelligence'\n])\nst.session_state.conversation_history.append(user_message)",
-        backend: "app.include_router(chatbot.router, prefix='/l1_automation')\napp.include_router(grievance.router, prefix='/grievance_management')\napp.include_router(call_analysis.router, prefix='/call_intelligence')",
-        data: "ChatRequest\n  message: str\n  user_id: str\n  conversation_history: list\n\nChatResponse\n  response, sentiment, intent, options, escalate_to_human",
-        intelligence: "sentiment = nlp_service.get_sentiment(message)\nintent = nlp_service.get_intent_and_specialization(message)\nreply = nlp_service.get_generative_response(message, history)\nescalate = nlp_service.predict_escalation(sentiment, intent, history)"
-      }
-    }
-  },
   {
     id: "researchmind",
     title: "ResearchMind — AI Research Intelligence Platform",
